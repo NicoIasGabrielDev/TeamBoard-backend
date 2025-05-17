@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String   @id @default(uuid())
+  name     String
+  email    String   @unique
+  password String
+  role     Role
+  team     Team?    @relation(fields: [teamId], references: [id])
+  teamId   String?
+
+  createdAt DateTime @default(now())
+}
+
+model Team {
+  id    String  @id @default(uuid())
+  name  String
+  users User[]
+  events Event[]
+}
+
+model Event {
+  id        String   @id @default(uuid())
+  title     String
+  type      EventType
+  date      DateTime
+  description String?
+  team      Team     @relation(fields: [teamId], references: [id])
+  teamId    String
+}
+
+enum Role {
+  manager
+  player
+}
+
+enum EventType {
+  training
+  game
+  meeting
+  concentration
+}
