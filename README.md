@@ -4,7 +4,7 @@ A RESTful API built with Node.js, Express and Prisma for managing football club 
 
 ## 🌐 Live API
 
-> [Insert your Render backend URL here once deployed]
+> {https://teamboard-backend-1.onrender.com}
 
 ---
 
